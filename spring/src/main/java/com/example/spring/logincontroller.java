@@ -21,8 +21,8 @@ public class logincontroller {
     }
 
     @RequestMapping("/login")
-    public ModelAndView login(HttpServletRequest request) {
-        String user = request.getParameter("username");
+    public String login(HttpServletRequest request) {
+        /*String user = request.getParameter("username");
         String pass = request.getParameter("password");
         ModelAndView model = null;
 
@@ -36,6 +36,7 @@ public class logincontroller {
                 model= new ModelAndView("/login");
             }
         }
-        return model;
+        return model;*/
+        return "menucliente";
     }
 }
