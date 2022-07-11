@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Cliente.findAll", query = "SELECT u FROM Cliente u")})
+
 public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

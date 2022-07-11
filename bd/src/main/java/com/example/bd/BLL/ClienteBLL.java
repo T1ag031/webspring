@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClienteBLL implements Serializable {
@@ -29,6 +30,27 @@ public class ClienteBLL implements Serializable {
         em.close();
         return clis;
     }
+    public static List<Cliente> readAll(){
+        List<Cliente> listaUser = new ArrayList<>();
+        EntityManager em = null;
+
+        Query q1 = em.createNamedQuery("Cliente.findAll");
+
+        List<Object> result = q1.getResultList();
+
+        for(Object u : result){
+            listaUser.add((Cliente) u);
+        }
+        return listaUser;
+    }
+    public static Cliente verifyLoginWeb(Cliente user) {
+        for(Cliente c : ClienteBLL.readAll()) {
+            if(c.getUsername().equals(user.getUsername()) && c.getPassword().equals(user.getPassword())) {
+                return c;
+            }
+        }
+        return null;
+    }
 
     //CRIAR CLIENTE
     public static void create(Cliente cliente) {
@@ -40,14 +62,7 @@ public class ClienteBLL implements Serializable {
         em.close();
     }
 
-    public static Cliente verifyLoginWeb(Cliente user) {
-        for(Cliente c : ClienteBLL.findClienteEntities()) {
-            if(c.getUsername().equals(user.getUsername()) && c.getPassword().equals(user.getPassword())) {
-                return c;
-            }
-        }
-        return null;
-    }
+
 
 
     //EDITAR CADA DADO DO CLIENTE
